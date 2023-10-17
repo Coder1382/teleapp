@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    html, body{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .body{
+        background-color: var(--tg-theme-secondary-bg-color);
+        color: var(--tg-theme-text-color);
+    }
+    #grid{
+        text-align: center;
+        font-size: 1.4vw;
+    }
+    #grid img{
+        width: 32%;
+        height: auto;
+        border-radius: 100vw;
+    }
+    .show_grid{
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+        row-gap: 0;
+        column-gap: 0;
+    }
+    .item{
+        width: 100%;
+        height: 100%;
+        font-style: italic;
+        padding: 1vw 0 0 0;
+        background-color: var(--tg-theme-bg-color);
+    }
+    button{
+        font-variant: small-caps;
+        font-weight: bold;
+        padding: .8vw;
+        font-size: 1.4vw;
+        margin: .5vw 0 0 0;
+        border: none;
+        border-radius: 1vw;
+        background-color: var(--tg-theme-button-color);
+        color: var(--tg-theme-button-text-color);
+    }
+    button:hover{
+        background-color: orange;
+    }
+    .hide{
+        display: none;
+    }
+    .show_form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    input{
+        width: 40%;
+        height: auto;
+        padding: .5vw;
+        margin: 1vw 0 1vw 0;
+        font-size: 1.2vw;
+        border-radius: 2vw;
+    }
+</style>
+<body>
+    <div id="grid" class="show_grid">
+        <div class="item">
+            <figure>
+                <img src="https://img.freepik.com/premium-vector/cute-simple-minimalist-cheese-melting-top-pizza-illustration_773815-9.jpg?w=740"/>
+                <figcaption>Вкусная пицца с кусочками салями</figcaption>
+                <button onclick="choice('pizza')">В корзину</button>
+            </figure>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://img.freepik.com/premium-photo/there-is-plate-fried-chicken-nuggies-yellow-background-generative-ai_974533-1669.jpg?w=740"/>
+                <figcaption>Румяные наггетсы с хрустящей корочкой</figcaption>
+                <button onclick="choice('nags')">В корзину</button>
+            </figure>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://img.freepik.com/free-vector/hand-drawn-flat-design-thai-food-illustration_52683-82126.jpg?w=740&t=st=1697537596~exp=1697538196~hmac=ff1880e7bd03b592573d94d65cb7e817c846f9a7ab611ef80d39ad581fc5cb76"/>
+                <figcaption>Питательная паста с ароматным соусом</figcaption>
+                <button onclick="choice('pasta')">В корзину</button>
+            </figure>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://img.freepik.com/premium-vector/burger-vector-cartoon-art-illustration-isolated-background_493087-51.jpg?w=740"/>
+                <figcaption>Большой чизбургер с сочной котлетой</figcaption>
+                <button onclick="choice('chsb')">В корзину</button>
+            </figure>
+        </div>
+    </div>
+    <form id="form" class="hide">
+        <input type="text" id="name" placeholder="name"/>
+        <input type="tel" id="tel" placeholder="phone"/>
+        <input type="email" id="email" placeholder="email"/>
+        <button id="order">Оформить заказ</button>
+    </form>
+    <script src="<script src="https://telegram.org/js/telegram-web-app.js"></script>"
+    <script>
+        telega=window.Telegram.WebApp;
+        function choice(str){
+            form=document.getElementById('grid').classList.remove('show_grid');
+            document.getElementById('grid').classList.add('hide');
+            form=document.getElementById('form').classList.remove('hide');
+            form=document.getElementById('form').classList.add('show_form');
+            form=document.getElementById('form');
+            form.getElementById('name').value=telega.initDataUnsafe.first_name+telega.initData.Unsafe.last_name;
+        }
+    </script>
+</body>
+</html>
