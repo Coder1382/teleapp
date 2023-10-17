@@ -22,12 +22,12 @@
     }
     #grid{
         text-align: center;
-        font-size: 1.4vw;
+        font-size: 1.4rem;
     }
     #grid img{
         width: 32%;
         height: auto;
-        border-radius: 100vw;
+        border-radius: 1000vw;
     }
     .show_grid{
         width: 100%;
@@ -42,15 +42,15 @@
         width: 100%;
         height: 100%;
         font-style: italic;
-        padding: 1vw 0 0 0;
+        padding: 2% 0 0 0;
         background-color: var(--tg-theme-bg-color);
     }
     button{
         font-variant: small-caps;
         font-weight: bold;
-        padding: .8vw;
-        font-size: 1.4vw;
-        margin: .5vw 0 0 0;
+        padding: 1.5%;
+        font-size: 1.4rem;
+        margin: 2% 0 0 0;
         border: none;
         border-radius: 1vw;
         background-color: var(--tg-theme-button-color);
@@ -73,10 +73,10 @@
     input{
         width: 40%;
         height: auto;
-        padding: .5vw;
-        margin: 1vw 0 1vw 0;
-        font-size: 1.2vw;
-        border-radius: 2vw;
+        padding: 1.5vw;
+        margin: 1% 0 1% 0;
+        font-size: 1.2rem;
+        border-radius: 1vw;
     }
 </style>
 <body>
@@ -114,19 +114,29 @@
         <input type="text" id="name" placeholder="name"/>
         <input type="tel" id="tel" placeholder="phone"/>
         <input type="email" id="email" placeholder="email"/>
-        <button id="order">Оформить заказ</button>
+        <button onclick="order()">Оформить заказ</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        telega=window.Telegram.WebApp;
+        let telega=window.Telegram.WebApp;
         telega.expand();
         function choice(str){
             form=document.getElementById('grid').classList.remove('show_grid');
             document.getElementById('grid').classList.add('hide');
             form=document.getElementById('form').classList.remove('hide');
             form=document.getElementById('form').classList.add('show_form');
-            form=document.getElementById('form');
-            form.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.user.initDataUnsafe.last_name;
+            document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.user.initDataUnsafe.last_name;
+        }
+        function order(e){
+            e.preventDefault();
+            name=document.getElementById('name').value;
+            phone=document.getElementById('tel').value;
+            email=document.getElementById('email').value;
+            data={
+                name: name, phone: phone, email: email
+            }
+            telega.sendData(JSON.stringify(data))
+
         }
     </script>
 </body>
