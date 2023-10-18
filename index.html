@@ -22,7 +22,7 @@
     }
     #grid{
         text-align: center;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     #grid img{
         width: 32%;
@@ -49,7 +49,7 @@
         font-variant: small-caps;
         font-weight: bold;
         padding: 1.5%;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         margin: 2% 0 0 0;
         border: none;
         border-radius: 1vw;
@@ -73,10 +73,11 @@
     input{
         width: 40%;
         height: auto;
-        padding: 1.5vw;
+        padding: 1.5%;
         margin: 1% 0 1% 0;
         font-size: 1.2rem;
         border-radius: 1vw;
+        border-color: #999;
     }
 </style>
 <body>
@@ -85,28 +86,28 @@
             <figure>
                 <img src="https://img.freepik.com/premium-vector/cute-simple-minimalist-cheese-melting-top-pizza-illustration_773815-9.jpg?w=740"/>
                 <figcaption>Вкусная пицца с кусочками салями</figcaption>
-                <button onclick="choice('pizza')">В корзину</button>
+                <button onclick="choice('pizza')">в корзину</button>
             </figure>
         </div>
         <div class="item">
             <figure>
                 <img src="https://img.freepik.com/premium-photo/there-is-plate-fried-chicken-nuggies-yellow-background-generative-ai_974533-1669.jpg?w=740"/>
                 <figcaption>Румяные наггетсы с хрустящей корочкой</figcaption>
-                <button onclick="choice('nags')">В корзину</button>
+                <button onclick="choice('nags')">в корзину</button>
             </figure>
         </div>
         <div class="item">
             <figure>
                 <img src="https://img.freepik.com/free-vector/hand-drawn-flat-design-thai-food-illustration_52683-82126.jpg?w=740&t=st=1697537596~exp=1697538196~hmac=ff1880e7bd03b592573d94d65cb7e817c846f9a7ab611ef80d39ad581fc5cb76"/>
                 <figcaption>Питательная паста с ароматным соусом</figcaption>
-                <button onclick="choice('pasta')">В корзину</button>
+                <button onclick="choice('pasta')">в корзину</button>
             </figure>
         </div>
         <div class="item">
             <figure>
                 <img src="https://img.freepik.com/premium-vector/burger-vector-cartoon-art-illustration-isolated-background_493087-51.jpg?w=740"/>
                 <figcaption>Большой чизбургер с сочной котлетой</figcaption>
-                <button onclick="choice('chsb')">В корзину</button>
+                <button onclick="choice('chsb')">в корзину</button>
             </figure>
         </div>
     </div>
@@ -136,7 +137,6 @@
                 name: name, phone: phone, email: email
             }
             telega.sendData(JSON.stringify(data))
-
         }
     </script>
 </body>
