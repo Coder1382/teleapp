@@ -136,8 +136,9 @@
             data={
                 name: name, phone: phone, email: email
             }
-            telega.sendData(JSON.stringify(data))
+            telega.sendData(JSON.stringify(data));
         }
+        telega.close();
     </script>
 </body>
 </html>
