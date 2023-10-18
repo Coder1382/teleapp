@@ -126,7 +126,7 @@
             document.getElementById('grid').classList.add('hide');
             form=document.getElementById('form').classList.remove('hide');
             form=document.getElementById('form').classList.add('show_form');
-            document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.user.initDataUnsafe.last_name;
+            document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.initDataUnsafe.user.last_name;
         }
         document.getElementById('order').addEventListener('click',(e)=>{
             e.preventDefault();
@@ -137,6 +137,7 @@
                 name: name, phone: phone, email: email
             }
             telega.sendData(JSON.stringify(data))
+            telega.close();
         })
     </script>
 </body>
