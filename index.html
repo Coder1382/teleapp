@@ -75,7 +75,7 @@
         height: auto;
         padding: 1.5%;
         margin: 1% 0 1% 0;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         border-radius: 1vw;
         border-color: #999;
     }
@@ -115,7 +115,7 @@
         <input type="text" id="name" placeholder="name"/>
         <input type="tel" id="tel" placeholder="phone"/>
         <input type="email" id="email" placeholder="email"/>
-        <button id='order' onclick="order()">Оформить заказ</button>
+        <button id='order'>Оформить заказ</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -129,15 +129,30 @@
             document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.initDataUnsafe.user.last_name;
         }
         document.getElementById('order').addEventListener('click',(e)=>{
-            //e.preventDefault();
             name=document.getElementById('name').value;
             phone=document.getElementById('tel').value;
             email=document.getElementById('email').value;
-            data={
-                name: name, phone: phone, email: email
+            if(name<3){
+                e.preventDefault();
+                document.getElementById('name').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('name').style.borderColor='red';
             }
-            telega.sendData(JSON.stringify(data))
-            telega.close();
+            else if(email<3){
+                e.preventDefault();
+                document.getElementById('tel').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('tel').style.borderColor='red';
+            }
+            else if(phone<3){
+                e.preventDefault();
+                document.getElementById('email').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('email').style.borderColor='red';
+            }
+            else{
+                data={
+                name: name, phone: phone, email: email
+                };
+                telega.sendData(JSON.stringify(data));
+            }
         })
     </script>
 </body>
