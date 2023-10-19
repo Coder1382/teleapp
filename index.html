@@ -101,7 +101,7 @@
             font-size: 1.1rem;
         }
         .item:first-child, .item:nth-child(2){
-            padding: 10% 0 0 0;
+            padding: 8% 0 0 0;
         }
         .item:last-child, .item:nth-child(3){
             padding: 0;
@@ -211,7 +211,7 @@
             }
             else{
                 data={
-                name: name, phone: phone, email: email
+                name: name, phone: phone, email: email, food: food
                 };
                 telega.sendData(JSON.stringify(data));
             }
