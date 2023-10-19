@@ -57,7 +57,7 @@
         border: none;
         border-radius: 1vw;
         background-color: lemonchiffon;
-        color: var(--tg-theme-button-text-color);
+        color: #222;
     }
     #bin{
         padding: 1%;
@@ -95,7 +95,7 @@
         #bin{
             position: absolute;
             top: 92vh;
-            left: 15vw;
+            left: 15.5vw;
         }
         button, #grid{
             font-size: 1.1rem;
@@ -211,7 +211,7 @@
             }
             else{
                 data={
-                name: name, phone: phone, email: email, food: food
+                name: name, phone: phone, email: email
                 };
                 telega.sendData(JSON.stringify(data));
             }
