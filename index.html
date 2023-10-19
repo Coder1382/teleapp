@@ -156,18 +156,22 @@
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        const food={
-            pizza: 0, nags: 0, pasta: 0, chsb: 0
-        };
+        const food={};
         let telega=window.Telegram.WebApp;
         telega.expand();
         function choice(str){
             document.getElementById('bin').innerText='перейти к оформлению заказа';
             document.getElementById('bin').style.backgroundColor='lemonchiffon';
+            let flag=false;
             for(let s in food){
                 if(s==str){
                     food[s]++;
+                    flag=true;
+                    break;
                 }
+            }
+            if(!flag){
+                food[str]=1;
             }
         }
         document.getElementById('bin').addEventListener('click',()=>{
@@ -210,8 +214,9 @@
                 document.getElementById('email').style.borderColor='red';
             }
             else{
-                data={
-                name: name, phone: phone, email: email, food: food
+                const ordered=JSON.stringify(food);
+                const data={
+                name: name, phone: phone, email: email, food: ordered
                 };
                 telega.sendData(JSON.stringify(data));
             }
