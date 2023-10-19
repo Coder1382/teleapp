@@ -25,8 +25,8 @@
         font-size: 1.3rem;
     }
     #grid img{
-        width: 32%;
-        height: auto;
+        width: 32vh;
+        height: 32vh;
         border-radius: 1000vw;
     }
     .show_grid{
@@ -45,16 +45,23 @@
         padding: 2% 0 0 0;
         background-color: var(--tg-theme-bg-color);
     }
+    .item:first-child, .item:nth-child(2){
+        padding: 3% 0 0 0;
+    }
     button{
         font-variant: small-caps;
-        font-weight: bold;
+        font-weight: 500;
         padding: 1.5%;
         font-size: 1.3rem;
         margin: 2% 0 0 0;
         border: none;
         border-radius: 1vw;
-        background-color: var(--tg-theme-button-color);
+        background-color: lemonchiffon;
         color: var(--tg-theme-button-text-color);
+    }
+    #bin{
+        padding: 1%;
+        margin: 0;
     }
     button:hover{
         background-color: orange;
@@ -78,6 +85,35 @@
         font-size: 1.1rem;
         border-radius: 1vw;
         border-color: #999;
+    }
+    #bin{
+        position: absolute;
+        top: 47vh;
+        left: 38vw;
+    }
+    @media only screen and (max-width: 640px){
+        #bin{
+            position: absolute;
+            top: 92vh;
+            left: 22.3vw;
+        }
+        button, #grid{
+            font-size: 1.1rem;
+        }
+        .item:first-child, .item:nth-child(2){
+            padding: 10% 0 0 0;
+        }
+        .item:last-child, .item:nth-child(3){
+            padding: 0;
+        }
+        #grid img{
+            width: 25vw;
+            height: 25vw;
+            border-radius: 1000vh;
+        }
+        input{
+            width: 60%;
+        }
     }
 </style>
 <body>
@@ -110,50 +146,76 @@
                 <button onclick="choice('chsb')">в корзину</button>
             </figure>
         </div>
+        <button id="bin">перейти к оформлению заказа</button>
     </div>
     <form id="form" class="hide">
         <input type="text" id="name" placeholder="name"/>
         <input type="tel" id="tel" placeholder="phone"/>
         <input type="email" id="email" placeholder="email"/>
-        <button id='order'>Оформить заказ</button>
+        <button id='order'>оформить заказ</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        const food={
+            pizza: 0, nags: 0, pasta: 0, chsb: 0
+        };
         let telega=window.Telegram.WebApp;
         telega.expand();
         function choice(str){
-            form=document.getElementById('grid').classList.remove('show_grid');
-            document.getElementById('grid').classList.add('hide');
-            form=document.getElementById('form').classList.remove('hide');
-            form=document.getElementById('form').classList.add('show_form');
-            document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.initDataUnsafe.user.last_name;
+            document.getElementById('bin').innerText='перейти к оформлению заказа';
+            document.getElementById('bin').style.backgroundColor='lemonchiffon';
+            for(let s in food){
+                if(s==str){
+                    food[s]++;
+                }
+            }
         }
+        document.getElementById('bin').addEventListener('click',()=>{
+            for(let s in food){
+                if(food[s]){
+                    form=document.getElementById('grid').classList.remove('show_grid');
+                    document.getElementById('grid').classList.add('hide');
+                    form=document.getElementById('form').classList.remove('hide');
+                    form=document.getElementById('form').classList.add('show_form');
+                    //document.getElementById('name').value=telega.initDataUnsafe.user.first_name+" "+telega.initDataUnsafe.user.last_name;
+                    return;
+                }
+            }
+            document.getElementById('bin').innerText='корзина пуста, выберите товар';
+            document.getElementById('bin').style.backgroundColor='tomato';
+        });
         document.getElementById('order').addEventListener('click',(e)=>{
             name=document.getElementById('name').value;
+            document.getElementById('name').style.borderColor='#999';
             phone=document.getElementById('tel').value;
+            document.getElementById('tel').style.borderColor='#999';
+            document.getElementById('email').style.borderColor='#999';
             email=document.getElementById('email').value;
-            if(name<3){
+            if(name.match(/^[a-zA-Z\s]{4,}$/)==null){
                 e.preventDefault();
-                document.getElementById('name').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('name').value='';
+                document.getElementById('name').placeholder='Неверное значение. Напишите имя';
                 document.getElementById('name').style.borderColor='red';
             }
-            else if(email<3){
+            else if(phone.match(/^[+]{1}[0-9]{11,}$/)==null){
                 e.preventDefault();
-                document.getElementById('tel').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('tel').value='';
+                document.getElementById('tel').placeholder='Неверное значение. Напишите номер телефона';
                 document.getElementById('tel').style.borderColor='red';
             }
-            else if(phone<3){
+            else if(email.match(/^[a-zA-Z0-9]{1,}[@]{1}[a-zA-Z]{1,}[\.]{1}[a-zA-Z]{1,}$/)==null){
                 e.preventDefault();
-                document.getElementById('email').placeholder='Слишком короткое имя. Напишите другое';
+                document.getElementById('email').value='';
+                document.getElementById('email').placeholder='Неверное значение. Напишите эл. почту';
                 document.getElementById('email').style.borderColor='red';
             }
             else{
                 data={
-                name: name, phone: phone, email: email
+                name: name, phone: phone, email: email, food: food
                 };
                 telega.sendData(JSON.stringify(data));
             }
-        })
+        });
     </script>
 </body>
 </html>
